@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-bullseye AS base
+FROM php:7.4-fpm-bullseye AS base
 
 WORKDIR /data
 
@@ -22,6 +22,9 @@ RUN apt-get update \
     libzip-dev \
     libicu-dev \
     libonig-dev \
+  && : 'Install Node.js' \
+  &&  curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+  && apt-get install -y nodejs \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && locale-gen en_US.UTF-8 \
